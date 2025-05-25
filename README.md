@@ -26,6 +26,12 @@ This project is a simple Java-based chat application featuring a graphical user 
 
 ## How to Run
 
+
+![image](https://github.com/user-attachments/assets/142ca2f8-30ac-4233-992e-a7c9454bae34)
+![image](https://github.com/user-attachments/assets/c85d6463-e400-445d-bd6b-4035e07a52a4)
+
+
+
 ### 1. Database Setup
 
 1. Start your MySQL server.
