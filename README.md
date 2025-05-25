@@ -38,6 +38,7 @@ java ClientGUI
 
 
 ## DataBase Scheme
+
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL UNIQUE,
@@ -56,6 +57,9 @@ CREATE TABLE messages (
 );
 
 
-# Licence
+
+
+
+## Licence
 This project is licensed under the MIT License.
 
