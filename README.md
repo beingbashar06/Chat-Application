@@ -55,6 +55,7 @@ CREATE TABLE messages (
   FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
-## Licence
+
+# Licence
 This project is licensed under the MIT License.
 
