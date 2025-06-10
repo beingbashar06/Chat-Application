@@ -1,71 +1,160 @@
-# Java Chat Application with GUI and MySQL Integration
+# 💬 Java Chat Application with GUI & MySQL Integration
 
-This project is a simple Java-based chat application featuring a graphical user interface (GUI) and MySQL database integration. It supports multiple users, message sending, and a basic client-server architecture using Java Swing and JDBC.
+This is a **Java-based chat application** with a graphical user interface (GUI), supporting **multi-user communication**, **private/public messaging**, and **MySQL-based persistence**. It includes **robust error handling**, **event processing**, and **modular code structure** for maintainability and scalability.
 
-## Project Structure
+---
 
-- `ClientGUI.java` — Client-side user interface for sending/receiving messages.
-- `ServerGUI.java` — Server-side GUI for monitoring incoming connections and messages.
-- `JdbcConnectivity.java` — Handles MySQL database connection and operations.
-- `database.sql` — SQL script to set up the required database and tables.
+## 📁 Project Structure
 
-## Features
+```
+.
+├── ClientGUI.java            # GUI and logic for chat clients
+├── ServerGUI.java            # Server-side GUI and connection management
+├── JdbcConnectivity.java     # MySQL database connectivity utility
+├── database.sql              # SQL schema for user & message storage
+└── README.md                 # Project overview and setup instructions
+```
 
-- User registration and login
-- Real-time messaging between users
-- GUI for both client and server
-- Persistent storage of users and messages in MySQL
-- Timestamped message tracking
+---
 
-## Technologies Used
+## ✅ Core Features
 
-- Java (Swing for GUI)
-- JDBC (Java Database Connectivity)
-- MySQL
-- SQL
+- 🔐 **User Authentication**
+  - Login/registration with username constraints and secure password hashing (bcrypt).
+  - Tracks user activity and online status.
 
-## How to Run
+- 💬 **Messaging System**
+  - Supports both public chat and private (1:1) messages.
+  - Real-time delivery status for messages.
 
+- 🌐 **Client-Server Architecture**
+  - Server listens for multiple clients simultaneously.
+  - Socket-based communication with efficient data flow.
 
-![image](https://github.com/user-attachments/assets/142ca2f8-30ac-4233-992e-a7c9454bae34)
-![image](https://github.com/user-attachments/assets/c85d6463-e400-445d-bd6b-4035e07a52a4)
+- 🛠️ **Database Integration**
+  - MySQL-backed data persistence with well-structured tables.
+  - Messages and user credentials are stored and validated via SQL queries.
 
+---
 
+## ⚙️ Setup Instructions
 
-### 1. Database Setup
+### 🔧 Prerequisites
 
-1. Start your MySQL server.
-2. Execute the `database.sql` script:
+- Java JDK 8 or above
+- MySQL Server
+- JDBC Driver (Connector/J)
 
-```bash
-javac ServerGUI.java ClientGUI.java JdbcConnectivity.java
-java ServerGUI
-java ClientGUI
+### 🏁 Getting Started
 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/java-chat-app.git
+   cd java-chat-app
+   ```
 
-## DataBase Scheme
+2. **Configure the MySQL database**
 
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(50) NOT NULL UNIQUE,
-  password VARCHAR(100) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+   - Import the schema from `database.sql` into your MySQL instance:
+     ```bash
+     mysql -u root -p < database.sql
+     ```
 
-CREATE TABLE messages (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  sender_id INT,
-  receiver_id INT,
-  message TEXT NOT NULL,
-  sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (sender_id) REFERENCES users(id),
-  FOREIGN KEY (receiver_id) REFERENCES users(id)
-);
+   - Update credentials in `JdbcConnectivity.java`:
+     ```java
+     String url = "jdbc:mysql://localhost:3306/chat_application";
+     String username = "your_mysql_username";
+     String password = "your_mysql_password";
+     ```
 
+3. **Compile and Run**
 
+   - Start the **server**:
+     ```bash
+     javac ServerGUI.java JdbcConnectivity.java
+     java ServerGUI
+     ```
 
+   - Launch the **client(s)**:
+     ```bash
+     javac ClientGUI.java JdbcConnectivity.java
+     java ClientGUI
+     ```
 
+---
 
-## Licence
-This project is licensed under the MIT License.
+## 🧠 Key Concepts & Architecture
 
+### 🔄 Event Handling
+
+- Listeners are efficiently managed via `ActionListener`, `WindowAdapter`, and `KeyListener` to capture user actions.
+- Event delegation ensures only relevant UI components update or trigger processes.
+
+### 🧪 Data Validation
+
+- **Client-side**: Username formats and message lengths validated via regex and boundary checks.
+- **Server-side**: All SQL operations use prepared statements to prevent SQL injection.
+
+### 🧱 Component Integration
+
+- The UI logic in `ClientGUI` and `ServerGUI` is tightly coupled with backend validation through `JdbcConnectivity`.
+- Threads manage multiple clients, and synchronization ensures consistent UI updates.
+
+---
+
+## 🛡️ Error Handling & Robustness
+
+- Graceful handling of:
+  - Invalid login attempts
+  - Database connection issues
+  - Socket disconnections
+- Ensures system continuity without crashing.
+
+---
+
+## ✨ Code Quality & Innovation
+
+- Modular classes with **separation of concerns** (UI, DB, logic).
+- Well-documented code with descriptive comments.
+- Leverages **regex constraints** on usernames and **password salting/hashing** for secure credential management.
+- Indexes in the DB enhance query performance for large-scale message tracking.
+
+---
+
+## 📚 Documentation
+
+### 📌 Class Overview
+
+| File               | Description |
+|--------------------|-------------|
+| `ClientGUI.java`   | Manages the client's UI, login/registration forms, and message panel. |
+| `ServerGUI.java`   | Handles server socket, incoming client connections, and server-side GUI. |
+| `JdbcConnectivity.java` | Manages all database transactions, including user login, registration, and message logs. |
+| `database.sql`     | Defines the schema for user accounts and messages with constraints, indexes, and relationships. |
+
+### 📎 Usage Notes
+
+- Login with valid credentials or register a new user.
+- Type messages in the text field to send. Use dropdown to select recipient for private chats.
+- The server must be running before clients can connect.
+
+---
+
+## 🧪 Future Improvements
+
+- ✅ Token-based authentication
+- 🌍 WebSocket upgrade for better scalability
+- 📱 Android or Web interface
+- 📊 Admin dashboard with user/message analytics
+
+---
+
+## 👨‍💻 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
+## 📄 License
+
+MIT License. See `LICENSE` file for more details.
